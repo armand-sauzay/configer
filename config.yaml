@@ -1,0 +1,12 @@
+age: 25
+custom:
+  classname: __main__.CustomClass
+  params:
+    age: 25
+    name: Jane Doe
+model:
+  classname: sklearn.linear_model.LogisticRegression
+  params:
+    C: 1.0
+    max_iter: 100
+name: Jane Doe

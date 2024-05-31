@@ -1,0 +1,5 @@
+_commit: v1.2.1
+_src_path: https://github.com/armand-sauzay/python-template.git
+module_name: configer
+module_version: 0.0.1
+project_name: configer
