@@ -1,17 +1,19 @@
 [tool.poetry]
-name = "python-template"
-version = "1.2.1"
+name = "configer"
+version = "0.0.1"
 description = ""
 authors = ["Armand Sauzay <sauzayarmand@gmail.com>"]
 readme = "README.md"
-packages = [{include = "{{ module_name }}"}]
+packages = [{include = "configer"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
+pyyaml = ">=5.0.0"
+pydantic-settings = ">=2.0.0"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.0.0"
+pytest = "8.0.0"
 
 [build-system]
 requires = ["poetry-core"]

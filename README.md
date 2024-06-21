@@ -1,43 +1,59 @@
-# python-template
+# configer
 
-This is a template for Python-based repositories.
+## Getting started 
 
-## Usage
-
-The recommended way to use this repo is to
-
-1. **Use this project as template**: and then run copier locally. Simply click on the "Use this template" button on the GitHub page to create a new repository based on this template.
-
-2. **Run copier**: you can download [Copier](https://github.com/copier-org/copier) and then run the following command:
+### Installation
 
 ```bash
-copier copy "https://github.com/armand-sauzay/python-template.git" <your_folder>
+pip install configer
 ```
 
-If you want to target a specific branch, you can use:
+### Usage
 
-```bash
-copier copy --vcs-ref "<python-template-branch>" "https://github.com/armand-sauzay/python-template.git" <target-folder>
+There are three core concepts in `configer`:
+- a config file: `config.yaml` or `config.json`
+- a config schema: `schema.yaml` or `schema.json`
+- a config object: an object of type `BaseConfig`
+
+#### 1. Create a config file
+
+Create a `config.json` file with the following content:
+
+```json
+{
+  "name": "John Doe",
+  "age": 30,
+  "is_student": true
+}
 ```
 
-## Project files
+#### 2. Create a schema file
 
-### .commitlintrc.json and .releaserc.json
+Create a `schema.json` file with the following content:
 
-These files are used by `semantic-release` to determine the type of the next release. The `.commitlintrc.json` file is used to lint the commit messages. The `.releaserc.json` file is used to determine the version of the next release based on the commit messages. To lint commit messages, this project uses the default configuration of `@commitlint/config-conventional`.
+```json
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "is_student": {
+      "type": "boolean"
+    }
+  },
+  "required": ["name", "age", "is_student"]
+}
+```
 
-### .python-version file
+#### 3. Create a config object
 
-The `.python-version` file contains the python version used in this project. This project has been built with using `pyenv` as python version manager.
+```python
+from configer import BaseConfig
 
-### .pre-commit-config.yaml
+config = BaseConfig(config_file="config.json", schema_file="schema.json")
+```
 
-This file is used by `pre-commit` to determine the hooks that will be run before each commit. The hooks are defined in the `hooks` section of the file. The hooks are run in the order they are defined in the file.
-
-### .github/workflows
-
-This repository uses Github Actions for CI/CD. CI is composed of `Lint` with pre-commit and `Test` with pytest. Release is composed of `Lint`, `Test`, `Release` with semantic-release.
-
-- Lint is done with [pre-commit](https://pre-commit.com/). To run lint locally, run `pre-commit run --all-files`.
-- Test is done with [pytest](https://docs.pytest.org/en/8.0.x/). To run test locally, run `pytest`. Or poetry run `pytest` if you use poetry as package manager.
-- Release is done with [semantic-release](https://github.com/semantic-release/semantic-release)
